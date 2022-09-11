@@ -1,0 +1,836 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Experience, key: 71b8358a'
+            label: Text
+            name: 71b8358a
+            widget: string
+          - hint: 'Original text: Skill Set, key: -11f6d62d'
+            label: Text
+            name: '-11f6d62d'
+            widget: string
+          - hint: 'Original text: Selected Projects, key: 5fa7685f'
+            label: Text
+            name: 5fa7685f
+            widget: string
+          - hint: 'Original text: Get in touch, key: -5230a9d2'
+            label: Text
+            name: '-5230a9d2'
+            widget: string
+          - hint: 'Original text: I , key: 8f7'
+            label: Text
+            name: 8f7
+            widget: string
+          - hint: 'Original text: code, key: 2eaded'
+            label: Text
+            name: 2eaded
+            widget: string
+          - hint: >-
+              Original text:  ideas into solutions that make a difference., key:
+              a438457
+            label: Text
+            name: a438457
+            widget: string
+          - hint: 'Original text: Hi 👋🏽, I''m , key: -418cad2d'
+            label: Text
+            name: '-418cad2d'
+            widget: string
+          - hint: 'Original text: Mohab, key: 4711987'
+            label: Text
+            name: '4711987'
+            widget: string
+          - hint: >-
+              Original text:  — a freelance software developer, university
+              teaching assistant, and a pretty good chef., key: 36755e37
+            label: Text
+            name: '36755e37'
+            widget: string
+          - hint: 'Original text: EXPERIENCE, key: 17d0456a'
+            label: Text
+            name: 17d0456a
+            widget: string
+          - hint: 'Original text: Some companies I''ve worked with. , key: 2d1aeee6'
+            label: Text
+            name: 2d1aeee6
+            widget: string
+          - hint: 'Original text: 🚀, key: 1b0de3'
+            label: Text
+            name: 1b0de3
+            widget: string
+          - hint: 'Original text: MSA, key: 12b5b'
+            label: Text
+            name: 12b5b
+            widget: string
+          - hint: "Original text: MSA\_University,, key: 61716579"
+            label: Text
+            name: '61716579'
+            widget: string
+          - hint: 'Original text:  Teaching Assistant, key: 62586deb'
+            label: Text
+            name: 62586deb
+            widget: string
+          - hint: 'Original text: Sep 2021- Present (Cairo, Egypt), key: -51e1e827'
+            label: Text
+            name: '-51e1e827'
+            widget: string
+          - hint: >-
+              Original text: I currently work as a Teaching Assistant at , key:
+              50911d07
+            label: Text
+            name: 50911d07
+            widget: string
+          - hint: "Original text: MSA\_University, key: -36a9c2ed"
+            label: Text
+            name: '-36a9c2ed'
+            widget: string
+          - hint: >-
+              Original text: , where I pursue an academic research journey and
+              try to make educational systems less boring., key: -7d863a99
+            label: Text
+            name: '-7d863a99'
+            widget: text
+          - hint: 'Original text: AWS, key: fedd'
+            label: Text
+            name: fedd
+            widget: string
+          - hint: 'Original text: Amazon Web Services,, key: 54b886'
+            label: Text
+            name: 54b886
+            widget: string
+          - hint: 'Original text:  Cloud Ambassador, key: 57f913fc'
+            label: Text
+            name: 57f913fc
+            widget: string
+          - hint: 'Original text: Apr 2020 - Apr 2021 (USA - Remote), key: -154ee189'
+            label: Text
+            name: '-154ee189'
+            widget: string
+          - hint: >-
+              Original text: Facilitated and encouraged students’ engagement
+              into various , key: 462f1c1b
+            label: Text
+            name: 462f1c1b
+            widget: string
+          - hint: >-
+              Original text:  events, seminars, courses, and workshops. Directly
+              learned from AWS team members the Amazonian workflow, recruitment,
+              and management processes. Getting continuous guidance on applying
+              teamwork and leadership skills and how to apply such skills., key:
+              2701e800
+            label: Text
+            name: '2701e800'
+            widget: text
+          - hint: 'Original text: IBM, key: 11a54'
+            label: Text
+            name: 11a54
+            widget: string
+          - hint: 'Original text: IBM,, key: 223058'
+            label: Text
+            name: '223058'
+            widget: string
+          - hint: >-
+              Original text:  Cloud Application Development Trainee, key:
+              -32014a98
+            label: Text
+            name: '-32014a98'
+            widget: string
+          - hint: 'Original text: 2017 -2019 (Cairo, Egypt), key: 1b1ea4ab'
+            label: Text
+            name: 1b1ea4ab
+            widget: string
+          - hint: 'Original text: Learning about various , key: -2037d016'
+            label: Text
+            name: '-2037d016'
+            widget: string
+          - hint: "Original text: \_Cloud features and their uses. Getting hands-on guidance and experience on deploying different IBM Cloud-Based Services., key: 3fb35b6e"
+            label: Text
+            name: 3fb35b6e
+            widget: text
+          - hint: 'Original text: SKILLS & CAPABILITIES, key: -3432c2f2'
+            label: Text
+            name: '-3432c2f2'
+            widget: string
+          - hint: "Original text: What do I bring to the 'table'? \_, key: 6282c9d5"
+            label: Text
+            name: 6282c9d5
+            widget: string
+          - hint: 'Original text: 🍽, key: 1b0ec1'
+            label: Text
+            name: 1b0ec1
+            widget: string
+          - hint: >-
+              Original text: Aside from good food, I bring tangible and
+              beneficial impact within any team. I'm an incredibly fast learner,
+              experienced developer, and lightspeed keyboard basher, so whatever
+              the environment is, I'll be able to start providing rewarding
+              outcomes in no time., key: -1bb512d8
+            label: Text
+            name: '-1bb512d8'
+            widget: text
+          - hint: "Original text: Web\_Development, key: 1944c5af"
+            label: Text
+            name: 1944c5af
+            widget: string
+          - hint: >-
+              Original text: I love good making good websites, and it happens
+              that I'm pretty good at making them too! I have years of
+              experience in Fullstack Web Development. I value clean &
+              extensible code, and follow proper coding practices to provide
+              neat and responsive websites that can be easily built upon
+              collaboratively in teams!, key: -4178fd5d
+            label: Text
+            name: '-4178fd5d'
+            widget: text
+          - hint: 'Original text: Cloud Services, key: 6a2c6e29'
+            label: Text
+            name: 6a2c6e29
+            widget: string
+          - hint: "Original text: I'm very experienced when it comes to cloud services and cloud-based apps. I have thorough experience with all popular cloud platforms such as AWS, GCP, Azure, IBM\_Cloud, etc through practical experience of developing and deploying tons of large-scale projects., key: -70e0ef02"
+            label: Text
+            name: '-70e0ef02'
+            widget: text
+          - hint: 'Original text: Data Science, key: 26bec7ee'
+            label: Text
+            name: 26bec7ee
+            widget: string
+          - hint: >-
+              Original text: I also have thorough experience in data science,
+              machine-learning, and deep learning. I'm oriented towards
+              utilizing my knowledge of such domains in building User-Oriented
+              apps that utilize such methods to help businesses achieve tangible
+              financial benefits., key: -3c42c02
+            label: Text
+            name: '-3c42c02'
+            widget: text
+          - hint: "Original text: Networks &\_Security, key: 1665f575"
+            label: Text
+            name: 1665f575
+            widget: string
+          - hint: >-
+              Original text: I've been interested in networks and cybersecurity
+              since my youth, this allowed me to gain a lot of years in those
+              fields. Throughout my career, I've built countless network-based
+              complex systems. Needless to say, I always love exploring new
+              challenges in computer networks and securing them., key: -12e5733a
+            label: Text
+            name: '-12e5733a'
+            widget: text
+          - hint: 'Original text: SELECTED PROJECTS, key: -b493ba1'
+            label: Text
+            name: '-b493ba1'
+            widget: string
+          - hint: 'Original text: Some of my work. , key: -50fa06'
+            label: Text
+            name: '-50fa06'
+            widget: string
+          - hint: 'Original text: 💻, key: 1b0c1e'
+            label: Text
+            name: 1b0c1e
+            widget: string
+          - hint: 'Original text: AttachBench, key: 34ff7ecb'
+            label: Text
+            name: 34ff7ecb
+            widget: string
+          - hint: "Original text: AttachBench is a cloud-based AI-Powered Intrusion\_Detection System workbench for developing smarter Intrusion Detection Systems., key: 7cad4b6a"
+            label: Text
+            name: 7cad4b6a
+            widget: text
+          - hint: 'Original text: Role: , key: -6dc3d1c4'
+            label: Text
+            name: '-6dc3d1c4'
+            widget: string
+          - hint: "Original text: Solution Architect &\_Developer, key: a12b09e"
+            label: Text
+            name: a12b09e
+            widget: string
+          - hint: 'Original text: Tools: , key: 1f445e21'
+            label: Text
+            name: 1f445e21
+            widget: string
+          - hint: >-
+              Original text: Streamlit, Python, Lightsail, Paramiko, key:
+              574ccfa0
+            label: Text
+            name: 574ccfa0
+            widget: string
+          - hint: 'Original text: MASCO — Website, key: -654786'
+            label: Text
+            name: '-654786'
+            widget: string
+          - hint: >-
+              Original text: MASCO is a general contractor specialized in
+              different field of construction that range from infrastructure to
+              building, water, environmental and power projects. Developing
+              MASCO's website was as requested to renew and update the company's
+              digital presence image., key: -10f0f2fb
+            label: Text
+            name: '-10f0f2fb'
+            widget: text
+          - hint: 'Original text: Developer, key: 72a307aa'
+            label: Text
+            name: 72a307aa
+            widget: string
+          - hint: 'Original text: Webmin, JS/HTML/CSS, key: -335ccc4d'
+            label: Text
+            name: '-335ccc4d'
+            widget: string
+          - hint: >-
+              Original text: Egyptian Food Export Council (FEC) — Website, key:
+              3e5b000e
+            label: Text
+            name: 3e5b000e
+            widget: string
+          - hint: >-
+              Original text: The Food Export Council (FEC), is one of the
+              leading export councils established by the Ministry of Trade and
+              Industry. Developing FEC's website was to help them achieve their
+              aim as promoting the Egyptian food processing industry as being a
+              reliable and reputable business partner for domestic and
+              international buyers., key: -27c8c49a
+            label: Text
+            name: '-27c8c49a'
+            widget: text
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: 'Original text: Plesk, JS/HTML/CSS/PHP, key: 57cc6019'
+            label: Text
+            name: 57cc6019
+            widget: string
+          - hint: 'Original text: TESTIMONIALS, key: -6a1ba84c'
+            label: Text
+            name: '-6a1ba84c'
+            widget: string
+          - hint: 'Original text: This is what people say about me. , key: 4f6a57b'
+            label: Text
+            name: 4f6a57b
+            widget: string
+          - hint: 'Original text: 👏🏽, key: 65a1f673'
+            label: Text
+            name: 65a1f673
+            widget: string
+          - hint: >-
+              Original text: Here are some reviews from the superheroes I've
+              worked with over the years., key: 5639d63
+            label: Text
+            name: 5639d63
+            widget: string
+          - hint: >-
+              Original text: ‘’Mohab is the best developer I've worked with.’’,
+              key: -22c4fc5c
+            label: Text
+            name: '-22c4fc5c'
+            widget: string
+          - hint: 'Original text: Gill Bates, key: -1105303b'
+            label: Text
+            name: '-1105303b'
+            widget: string
+          - hint: 'Original text: CEO, Yo mamma''s company, key: -4ac8aad3'
+            label: Text
+            name: '-4ac8aad3'
+            widget: string
+          - hint: >-
+              Original text: ‘’All I can say is hiring Mohab is the best
+              investment we've ever done..’’, key: -4a1285bc
+            label: Text
+            name: '-4a1285bc'
+            widget: string
+          - hint: 'Original text: Beff Jezos, key: 2c4012a6'
+            label: Text
+            name: 2c4012a6
+            widget: string
+          - hint: 'Original text: CEO, Zamanon, key: 4459bc51'
+            label: Text
+            name: 4459bc51
+            widget: string
+          - hint: 'Original text: ‘’How did he do it???’’, key: 3ed2b3b0'
+            label: Text
+            name: 3ed2b3b0
+            widget: string
+          - hint: 'Original text: Everyone else, key: -1ba9c952'
+            label: Text
+            name: '-1ba9c952'
+            widget: string
+          - hint: 'Original text: CEO, Big Chungus, key: -4d62b59a'
+            label: Text
+            name: '-4d62b59a'
+            widget: string
+          - hint: 'Original text: GET IN TOUCH, key: -12b421f2'
+            label: Text
+            name: '-12b421f2'
+            widget: string
+          - hint: 'Original text: Let''s work together! , key: -1e300971'
+            label: Text
+            name: '-1e300971'
+            widget: string
+          - hint: 'Original text: 🤝🏽, key: 65a57020'
+            label: Text
+            name: 65a57020
+            widget: string
+          - hint: >-
+              Original text: Do you have an interesting project or idea? I'd
+              love to hear about it!, key: -3cebe6e9
+            label: Text
+            name: '-3cebe6e9'
+            widget: string
+          - hint: >-
+              Original text: Think I might be just the right addition to your
+              team? Let's find out!, key: -29c021f1
+            label: Text
+            name: '-29c021f1'
+            widget: string
+          - hint: >-
+              Original text: Simply drop me an email. Can't wait to hear from
+              you!, key: -2c233831
+            label: Text
+            name: '-2c233831'
+            widget: string
+          - hint: 'Original text: Work with me, key: 3ac1ed43'
+            label: Text
+            name: 3ac1ed43
+            widget: string
+          - hint: 'Original text: Linkedin, key: 4b0ff51e'
+            label: Text
+            name: 4b0ff51e
+            widget: string
+          - hint: 'Original text: Github, key: 7f260803'
+            label: Text
+            name: 7f260803
+            widget: string
+          - hint: 'Original text: Made with ❤️ and ☕ by Mohab, key: -38dca3e8'
+            label: Text
+            name: '-38dca3e8'
+            widget: string
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: 'Original text: Password, key: 4c641ebb'
+            label: Text
+            name: 4c641ebb
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved, key: 556d64d8
+            label: Text
+            name: 556d64d8
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: #Experience, key: -33035a13'
+            label: Link
+            name: '-33035a13'
+            widget: string
+          - hint: 'Original link: #Skills, key: -30ce79bb'
+            label: Link
+            name: '-30ce79bb'
+            widget: string
+          - hint: 'Original link: #Projects-Section, key: 3eb896b5'
+            label: Link
+            name: 3eb896b5
+            widget: string
+          - hint: 'Original link: #Contact, key: -30472183'
+            label: Link
+            name: '-30472183'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: https://www.foodsfromegypt.com/, key: -4b8c93c6'
+            label: Link
+            name: '-4b8c93c6'
+            widget: string
+          - hint: 'Original link: mailto:mohabsameh@outlook.com, key: -128af43d'
+            label: Link
+            name: '-128af43d'
+            widget: string
+          - hint: >-
+              Original link: https://www.linkedin.com/in/mohab-sameh/, key:
+              -2013b27b
+            label: Link
+            name: '-2013b27b'
+            widget: string
+          - hint: 'Original link: https://github.com/mohab-sameh, key: bb0df12'
+            label: Link
+            name: bb0df12
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 5a009a7e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2dca91cb
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5259966d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4d0025e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 85d25cc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3313eb70
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2790e8a8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 25ee51f8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2bcdaff9'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6c1fc4f0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7a596c57'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '77651504'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4abef31c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2b1beb3c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
